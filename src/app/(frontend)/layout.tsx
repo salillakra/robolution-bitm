@@ -1,7 +1,7 @@
-import React from 'react'
 import { Metadata } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
+import Script from 'next/script'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ClientLayout } from '@/components/ClientLayout'
 import SmoothScroll from '@/components/SmoothScroll'
@@ -73,17 +73,21 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans isolate`}>
-        <SmoothScroll />
-        <main>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <SmoothScroll />
+          <main>
             <ClientLayout>{children}</ClientLayout>
-          </ThemeProvider>
-        </main>
+          </main>
+        </ThemeProvider>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-3LKNP3KLNW" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+             window.dataLayer = window.dataLayer || [];
+             function gtag(){dataLayer.push(arguments);}
+             gtag('js', new Date());
+             gtag('config', 'G-3LKNP3KLNW');
+            `}
+        </Script>
       </body>
     </html>
   )
