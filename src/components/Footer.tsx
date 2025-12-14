@@ -4,13 +4,17 @@ import React from 'react'
 import Link from 'next/link'
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
+import Image from 'next/image'
 
 export const Footer = () => {
   return (
     <footer className="relative z-10 bg-black/80 border-t border-white/10 pt-16 pb-8 px-4">
       <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-12 mb-12">
         <div className="col-span-1 md:col-span-2">
-          <h3 className="text-2xl font-bold mb-4 tracking-tight">ROBOLUTION</h3>
+          <h3 className="text-2xl flex items-center gap-2 font-bold mb-4 tracking-tight">
+            <Image src="/logo.jpg" className='h-10 w-10' height={100} width={100} alt="Robolution Logo" />
+            ROBOLUTION
+          </h3>
           <p className="text-white/50 max-w-sm mb-6 leading-relaxed">
             The official robotics club of BIT Mesra. Fostering innovation, creativity, and technical
             excellence since 2001.
