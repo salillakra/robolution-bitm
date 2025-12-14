@@ -4,9 +4,16 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { PrivacyPolicy } from './collections/PrivacyPolicy'
+import { TermsOfService } from './collections/TermsOfService'
+import { TeamMembers } from './collections/TeamMembers'
+import { Events } from './collections/Events'
+import { AboutUs } from './collections/AboutUs'
+import { Annoucement } from './collections/Annoucement'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -17,8 +24,22 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      graphics: {
+        Logo: './components/Logo',
+      },
+    },
   },
-  collections: [Users, Media],
+  collections: [
+    Users,
+    Media,
+    PrivacyPolicy,
+    TermsOfService,
+    TeamMembers,
+    Events,
+    AboutUs,
+    Annoucement,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -30,5 +51,22 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    formBuilderPlugin({
+      fields: {
+        text: true,
+        textarea: true,
+        select: true,
+        radio: true,
+        email: true,
+        state: true,
+        country: true,
+        checkbox: true,
+        number: true,
+        message: true,
+        date: false,
+        payment: false,
+      },
+    }),
+  ],
 })
