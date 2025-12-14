@@ -18,11 +18,52 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  description: 'Robolution BITM',
-  title: 'Robolution BITM',
+  title: {
+    default: 'Robolution | BIT Mesra | Robotics Club of BIT Mesra',
+    template: '%s | Robolution BIT Mesra',
+  },
+  description:
+    'Robolution is the official robotics and innovation club of BIT Mesra. We build robots, compete nationally, and push hands-on engineering through workshops, projects, and tech events.',
+  keywords: [
+    'Robolution',
+    'BIT Mesra',
+    'Robotics Club',
+    'Engineering Club',
+    'Robotics Society',
+    'Student Robotics',
+    'BIT Mesra Robotics',
+    'Tech Club',
+  ],
+  authors: [{ name: 'Robolution BIT Mesra' }],
+  creator: 'Robolution BIT Mesra',
+  openGraph: {
+    title: 'Robolution | Robotics Club of BIT Mesra',
+    description:
+      'Official robotics club of BIT Mesra focused on innovation, competitions, and real-world engineering.',
+    siteName: 'Robolution',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Robolution | BIT Mesra | Robotics Club of BIT Mesra',
+      },
+    ],
+    locale: 'en_IN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Robolution | Robotics Club of BIT Mesra',
+    description: 'Building robots. Competing hard. Learning engineering the real way.',
+    images: ['/og-image.png'],
+  },
   icons: {
     icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
+  // metadataBase: new URL('https://robolution.bitmesra.ac.in'), 
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
