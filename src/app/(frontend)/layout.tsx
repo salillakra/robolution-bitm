@@ -4,6 +4,7 @@ import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ClientLayout } from '@/components/ClientLayout'
+import SmoothScroll from '@/components/SmoothScroll'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
-  // metadataBase: new URL('https://robolution.bitmesra.ac.in'), 
+  // metadataBase: new URL('https://robolution.bitmesra.ac.in'),
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -72,6 +73,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans isolate`}>
+        <SmoothScroll />
         <main>
           <ThemeProvider
             attribute="class"
