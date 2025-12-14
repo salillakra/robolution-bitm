@@ -22,6 +22,7 @@
     "@payloadcms/next": "3.68.3",
     "@payloadcms/plugin-form-builder": "^3.68.3",
     "@payloadcms/richtext-lexical": "^3.68.3",
+    "@payloadcms/storage-vercel-blob": "^3.68.3",
     "@payloadcms/ui": "3.68.3",
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
