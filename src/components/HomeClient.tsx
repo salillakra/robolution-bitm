@@ -105,7 +105,7 @@ const HomeClient: React.FC<HomeClientProps> = ({ sponsors, galleryImages }) => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center p-4 py-20">
+      <section className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center p-4 pt-20">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-100 bg-white/5 blur-[120px] rounded-full -z-10" />
 
         <p className="text-xs md:text-base uppercase tracking-[0.2em] md:tracking-[0.3em] mb-6 text-white/50 border border-white/10 px-3 md:px-4 py-2 rounded-full backdrop-blur-sm">
@@ -148,7 +148,7 @@ const HomeClient: React.FC<HomeClientProps> = ({ sponsors, galleryImages }) => {
       </section>
 
       {/* About Section */}
-      <section className="relative z-10 py-32 px-4">
+      <section className="relative z-10 py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>

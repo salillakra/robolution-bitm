@@ -118,12 +118,11 @@ const renderMemberRow = (members: Member[], keyPrefix: string) => {
 
 const HeroSection = () => (
   <div className="relative w-full h-[50vh] flex items-center justify-center overflow-hidden mb-20">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/10 blur-[120px] rounded-full" />
     <div className="relative z-10 text-center px-4">
       <p className="text-sm md:text-base uppercase tracking-[0.3em] mb-6 text-white/50">
         The Minds Behind Innovation
       </p>
-      <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-white mb-4 px-4">
+      <h2 className="text-5xl sm:text-6xl md:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40 pb-2 px-4">
         Our Team
       </h2>
       <p className="text-base md:text-2xl text-white/60 max-w-2xl mx-auto px-4">
