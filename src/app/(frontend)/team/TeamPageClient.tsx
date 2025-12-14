@@ -171,6 +171,14 @@ export default function TeamPageClient({ members }: TeamPageClientProps) {
       vicePresident: [] as Member[],
       jointPresident: [] as Member[],
     },
+    captains: {
+      captain: [] as Member[],
+      viceCaptain: [] as Member[],
+    },
+    secretaries: {
+      generalSecretary: [] as Member[],
+      jointSecretary: [] as Member[],
+    },
     design: [] as Member[],
     management: [] as Member[],
     treasurer: [] as Member[],
@@ -199,6 +207,18 @@ export default function TeamPageClient({ members }: TeamPageClientProps) {
         break
       case 'joint_president':
         grouped.presidents.jointPresident.push(m)
+        break
+      case 'captain':
+        grouped.captains.captain.push(m)
+        break
+      case 'vice_captain':
+        grouped.captains.viceCaptain.push(m)
+        break
+      case 'general_secretary':
+        grouped.secretaries.generalSecretary.push(m)
+        break
+      case 'joint_secretary':
+        grouped.secretaries.jointSecretary.push(m)
         break
       case 'design_head':
         grouped.design.push(m)
@@ -268,6 +288,38 @@ export default function TeamPageClient({ members }: TeamPageClientProps) {
             <div className="flex flex-wrap justify-center gap-6">
               {renderMemberRow(grouped.presidents.vicePresident, 'vice-president')}
               {renderMemberRow(grouped.presidents.jointPresident, 'joint-president')}
+            </div>
+          </div>
+        </section>
+
+        <section className="my-20 px-4 max-w-7xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
+            CAPTAINS
+          </h2>
+
+          <div className="space-y-12">
+            {/* Captain - Center */}
+            {renderMemberRow(grouped.captains.captain, 'captain')}
+
+            {/* Vice Captains - Side by side */}
+            <div className="flex flex-wrap justify-center gap-6">
+              {renderMemberRow(grouped.captains.viceCaptain, 'vice-captain')}
+            </div>
+          </div>
+        </section>
+
+        <section className="my-20 px-4 max-w-7xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
+            SECRETARIES
+          </h2>
+
+          <div className="space-y-12">
+            {/* General Secretary - Center */}
+            {renderMemberRow(grouped.secretaries.generalSecretary, 'general-secretary')}
+
+            {/* Joint Secretaries - Side by side */}
+            <div className="flex flex-wrap justify-center gap-6">
+              {renderMemberRow(grouped.secretaries.jointSecretary, 'joint-secretary')}
             </div>
           </div>
         </section>
