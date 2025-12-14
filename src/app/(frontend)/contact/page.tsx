@@ -1,5 +1,5 @@
 import DarkVeil from '@/components/DarkVeil'
-import { Mail, MapPin, Linkedin, Github, Instagram, Facebook } from 'lucide-react'
+import { Mail, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import ContactForm from './ContactForm'

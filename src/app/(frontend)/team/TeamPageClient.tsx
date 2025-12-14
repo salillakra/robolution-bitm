@@ -18,7 +18,7 @@ interface Member {
   id: string | number
   name: string
   title: string
-  image?: any
+  image?: { url: string; alt?: string } | null
   socials?: Socials
   category: string
   year?: string

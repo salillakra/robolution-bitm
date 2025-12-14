@@ -1,11 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { notFound } from 'next/navigation'
-import { Footer } from '@/components/Footer'
-import Link from 'next/link'
 import { renderLexical } from '@/lib/lexicalToHtml'
 import type { TermsOfService } from '@/payload-types'
-import { ArrowLeft } from 'lucide-react'
 
 export default async function TermsOfServicePage() {
   const payload = await getPayload({ config })

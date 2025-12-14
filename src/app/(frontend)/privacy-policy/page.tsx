@@ -1,11 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { Footer } from '@/components/Footer'
 import { renderLexical } from '@/lib/lexicalToHtml'
 import type { PrivacyPolicy } from '@/payload-types'
-import { ArrowLeft } from 'lucide-react'
 
 export const revalidate = 3600 // doesn't change often
 

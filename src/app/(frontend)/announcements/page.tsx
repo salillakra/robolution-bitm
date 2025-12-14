@@ -1,8 +1,5 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
-import Link from 'next/link'
-import { ArrowLeft, Bell } from 'lucide-react'
-import { Footer } from '@/components/Footer'
 import { renderLexical } from '@/lib/lexicalToHtml'
 
 export const revalidate = 6200 // Revalidate every hour
