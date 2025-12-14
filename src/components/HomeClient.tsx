@@ -281,25 +281,25 @@ const HomeClient: React.FC<HomeClientProps> = ({ sponsors, galleryImages }) => {
           {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto mb-16">
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm hover:bg-white/10 transition-all hover:scale-105">
-              <div className="text-5xl md:text-6xl font-black text-white mb-3">24+</div>
+              <div className="text-3xl md:text-6xl font-black text-white mb-3">24+</div>
               <div className="text-sm text-white/60 uppercase tracking-wider font-semibold">
                 Years of Excellence
               </div>
             </div>
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm hover:bg-white/10 transition-all hover:scale-105">
-              <div className="text-5xl md:text-6xl font-black text-white mb-3">1000+</div>
+              <div className="text-3xl md:text-6xl font-black text-white mb-3">1000+</div>
               <div className="text-sm text-white/60 uppercase tracking-wider font-semibold">
                 Students Trained
               </div>
             </div>
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm hover:bg-white/10 transition-all hover:scale-105">
-              <div className="text-5xl md:text-6xl font-black text-white mb-3">50+</div>
+              <div className="text-3xl md:text-6xl font-black text-white mb-3">50+</div>
               <div className="text-sm text-white/60 uppercase tracking-wider font-semibold">
                 Competitions Won
               </div>
             </div>
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm hover:bg-white/10 transition-all hover:scale-105">
-              <div className="text-5xl md:text-6xl font-black text-white mb-3">∞</div>
+              <div className="text-3xl md:text-6xl font-black text-white mb-3">∞</div>
               <div className="text-sm text-white/60 uppercase tracking-wider font-semibold">
                 Innovation
               </div>
