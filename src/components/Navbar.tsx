@@ -23,6 +23,8 @@ export const Navbar = () => {
   const pathname = usePathname()
   const [activeTab, setActiveTab] = useState('Home')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
 
   const handleNavClick = (name: string) => {
     setActiveTab(name)
@@ -32,6 +34,30 @@ export const Navbar = () => {
   useEffect(() => {
     setActiveTab(pathname)
   }, [pathname])
+
+  // Handle scroll to show/hide navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY < 10) {
+        // Always show at top
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down & past threshold
+        setIsVisible(false)
+        setMobileMenuOpen(false) // Close mobile menu when hiding
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up
+        setIsVisible(true)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -48,10 +74,15 @@ export const Navbar = () => {
   return (
     <>
       {/* Desktop & Mobile Navbar */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 md:pt-6 px-4">
+      <motion.div
+        initial={{ y: -100 }}
+        animate={{ y: isVisible ? 0 : -100 }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 md:pt-6 px-4"
+      >
         <motion.nav
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className={cn(
             'w-full max-w-7xl flex items-center justify-between p-3 md:p-1 rounded-full border border-white/20',
@@ -116,7 +147,7 @@ export const Navbar = () => {
             </AnimatePresence>
           </button>
         </motion.nav>
-      </div>
+      </motion.div>
 
       {/* Mobile Menu Overlay & Content */}
       <AnimatePresence>
@@ -139,7 +170,7 @@ export const Navbar = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
               transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
-              className="fixed top-24 left-4 right-4 z-50 md:hidden"
+              className="fixed top-24 left-4 right-4 z-50 md:hidden backdrop-blur-2xl"
               style={{ willChange: 'transform, opacity' }}
             >
               <div className="bg-linear-to-br from-white/15 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl overflow-hidden">

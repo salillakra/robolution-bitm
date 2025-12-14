@@ -31,16 +31,16 @@ const AboutPageClient = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-sm md:text-base uppercase tracking-[0.3em] mb-6 text-white/50 border border-white/10 px-4 py-2 rounded-full backdrop-blur-sm inline-block">
+            <p className="text-xs md:text-base uppercase tracking-[0.2em] md:tracking-[0.3em] mb-6 text-white/50 border border-white/10 px-3 md:px-4 py-2 rounded-full backdrop-blur-sm inline-block">
               {data.heroTitle}
             </p>
 
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40 px-4">
               {data.title}
             </h1>
 
             {data.heroSubtitle && (
-              <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base md:text-2xl text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
                 {data.heroSubtitle}
               </p>
             )}
@@ -57,7 +57,7 @@ const AboutPageClient = ({
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div
-              className="space-y-6 text-lg text-white/70 leading-relaxed prose prose-invert max-w-none"
+              className="space-y-4 md:space-y-6 text-sm md:text-lg text-white/70 leading-relaxed prose prose-invert max-w-none prose-p:text-sm md:prose-p:text-lg"
               dangerouslySetInnerHTML={{ __html: mainContentHtml }}
             />
 
@@ -81,19 +81,19 @@ const AboutPageClient = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+            <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center px-4">
               Our Vision & Mission
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* Vision */}
               {data.vision && (
-                <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm hover:bg-white/10 transition-all">
+                <div className="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm hover:bg-white/10 transition-all">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 bg-white/10 rounded-2xl">
                       <LucideIcons.Target className="w-8 h-8" />
                     </div>
-                    <h3 className="text-2xl font-bold">Vision</h3>
+                    <h3 className="text-xl md:text-2xl font-bold">Vision</h3>
                   </div>
                   <div
                     className="text-white/70 leading-relaxed prose prose-invert"
@@ -131,7 +131,7 @@ const AboutPageClient = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">Our Values</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center px-4">Our Values</h2>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {values.map((value, index) => {
@@ -203,8 +203,8 @@ const AboutPageClient = ({
       {/* CTA Section */}
       <section className="relative z-10 py-32 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Join Our Journey</h2>
-          <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 px-4">Join Our Journey</h2>
+          <p className="text-base md:text-xl text-white/70 mb-10 max-w-2xl mx-auto px-4">
             Be part of something extraordinary. Join Robolution and shape the future of robotics.
           </p>
           <div className="flex flex-wrap justify-center gap-4">

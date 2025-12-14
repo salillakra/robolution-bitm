@@ -41,8 +41,8 @@ const MemberCard = ({ member }: { member: Member }) => {
   }
 
   return (
-    <div className="group relative flex flex-col items-center py-6 m-4 w-60 md:w-64 h-auto bg-white/5 backdrop-blur-md shadow-xl rounded-3xl transform transition-all duration-300 hover:scale-105 border border-white/10 hover:bg-white/10">
-      <div className="relative w-40 h-40 md:w-48 md:h-48 mb-4">
+    <div className="group relative flex flex-col items-center py-6 m-2 md:m-4 w-full max-w-[280px] sm:w-60 md:w-64 h-auto bg-white/5 backdrop-blur-md shadow-xl rounded-3xl transform transition-all duration-300 hover:scale-105 border border-white/10 hover:bg-white/10">
+      <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mb-4">
         {imageSrc ? (
           <Image
             src={imageSrc}
@@ -57,7 +57,7 @@ const MemberCard = ({ member }: { member: Member }) => {
         )}
       </div>
 
-      <p className="text-xl font-semibold text-white group-hover:text-blue-200 transition-colors duration-300 text-center px-2">
+      <p className="text-lg md:text-xl font-semibold text-white group-hover:text-blue-200 transition-colors duration-300 text-center px-2">
         {member.name}
       </p>
       <p className="text-sm text-gray-400 group-hover:text-white transition-colors duration-300 text-center mb-4 px-2">
@@ -125,8 +125,10 @@ const HeroSection = () => (
       <p className="text-sm md:text-base uppercase tracking-[0.3em] mb-6 text-white/50">
         The Minds Behind Innovation
       </p>
-      <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-white mb-4">Our Team</h2>
-      <p className="text-xl md:text-2xl text-white/60 max-w-2xl mx-auto">
+      <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-white mb-4 px-4">
+        Our Team
+      </h2>
+      <p className="text-base md:text-2xl text-white/60 max-w-2xl mx-auto px-4">
         Meet the passionate individuals driving Robolution forward
       </p>
     </div>
@@ -240,7 +242,7 @@ export default function TeamPageClient({ members }: TeamPageClientProps) {
   })
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans relative">
+    <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans relative overflow-x-hidden">
       <Navbar />
 
       {/* Fixed Background */}
@@ -258,7 +260,7 @@ export default function TeamPageClient({ members }: TeamPageClientProps) {
         </div>
 
         <section className="my-20 px-4 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
             PRESIDENTS
           </h2>
 

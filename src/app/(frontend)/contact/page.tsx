@@ -67,7 +67,7 @@ export default async function ContactPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans">
+    <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans overflow-x-hidden">
       <Navbar />
 
       {/* Fixed Background */}
@@ -81,16 +81,16 @@ export default async function ContactPage() {
 
         <div className="max-w-6xl mx-auto text-center">
           <div className="inline-block mb-6">
-            <span className="text-sm uppercase tracking-[0.4em] text-white/50 font-semibold border border-white/10 px-6 py-2 rounded-full backdrop-blur-sm">
+            <span className="text-xs md:text-sm uppercase tracking-[0.3em] md:tracking-[0.4em] text-white/50 font-semibold border border-white/10 px-4 md:px-6 py-2 rounded-full backdrop-blur-sm">
               Get in Touch
             </span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40 px-4">
             Contact Us
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-2xl text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
             Have a question or want to collaborate? We&apos;d love to hear from you.
           </p>
         </div>
@@ -130,9 +130,9 @@ export default async function ContactPage() {
           <div className="grid lg:grid-cols-5 gap-8">
             {/* Contact Form - Takes up more space */}
             <div className="lg:col-span-3">
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3">Send us a message</h2>
-                <p className="text-white/60 mb-8">
+              <div className="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-12 backdrop-blur-sm">
+                <h2 className="text-2xl md:text-4xl font-bold mb-3">Send us a message</h2>
+                <p className="text-sm md:text-base text-white/60 mb-8">
                   Fill out the form below and we&apos;ll get back to you as soon as possible.
                 </p>
 
@@ -157,9 +157,9 @@ export default async function ContactPage() {
             {/* Sidebar Info */}
             <div className="lg:col-span-2 space-y-6">
               {/* Social Links */}
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
-                <h3 className="text-2xl font-bold mb-6">Connect with us</h3>
-                <div className="flex gap-4">
+              <div className="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm">
+                <h3 className="text-xl md:text-2xl font-bold mb-6">Connect with us</h3>
+                <div className="flex flex-wrap gap-4">
                   {socialLinks.map((social, index) => (
                     <a
                       key={index}
@@ -206,9 +206,11 @@ export default async function ContactPage() {
       {/* Map Section */}
       <section className="relative z-10 px-4 pb-32">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Find Us</h2>
-            <p className="text-white/60">Visit us at BIT Mesra Campus, Ranchi</p>
+          <div className="mb-8 text-center px-4">
+            <h2 className="text-2xl md:text-4xl font-bold mb-3">Find Us</h2>
+            <p className="text-sm md:text-base text-white/60">
+              Visit us at BIT Mesra Campus, Ranchi
+            </p>
           </div>
 
           <div className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-sm shadow-2xl">

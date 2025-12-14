@@ -27,15 +27,22 @@ const AboutPage = async () => {
   const visionHtml = aboutData.vision ? await renderLexical(aboutData.vision) : ''
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans">
+    <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans overflow-x-hidden">
       <Navbar />
 
-      <AboutPageClient
-        data={aboutData}
-        mainContentHtml={mainContentHtml}
-        missionHtml={missionHtml}
-        visionHtml={visionHtml}
-      />
+      {/* Fixed Background */}
+      <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
+        <DarkVeil />
+      </div>
+
+      <div className="relative z-10">
+        <AboutPageClient
+          data={aboutData}
+          mainContentHtml={mainContentHtml}
+          missionHtml={missionHtml}
+          visionHtml={visionHtml}
+        />
+      </div>
 
       <Footer />
     </div>
