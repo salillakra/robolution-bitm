@@ -1,9 +1,17 @@
 import React from 'react'
-import './styles.css'
+import { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
 
-export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  description: 'Robolution BITM',
+  title: 'Robolution BITM',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -11,8 +19,17 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
-      <body>
-        <main>{children}</main>
+      <body className={`${inter.className} isolate`}>
+        <main>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </main>
       </body>
     </html>
   )
