@@ -33,25 +33,9 @@ export default async function AnnouncementsPage() {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30 font-sans">
-      <header className="border-b border-white/10 backdrop-blur-lg bg-black/50 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
-          <Link
-            href="/"
-            className="items-center text-white/60 flex hover:text-white transition-colors text-sm group"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-            Back to Home
-          </Link>
-          <div className="flex items-center gap-2 text-indigo-400">
-            <Bell className="w-4 h-4" />
-            <span className="text-sm font-medium tracking-wide">Updates</span>
-          </div>
-        </div>
-      </header>
-
       <main className="max-w-4xl mx-auto px-4 py-16 md:py-24">
         {/* Title */}
-        <div className="mb-20 text-center relative">
+        <div className="mb-20 text-center relative mt-24">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 h-75 bg-indigo-500/20 blur-[100px] rounded-full pointer-events-none" />
           <h1 className="text-4xl md:text-6xl font-black mb-6 bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40 relative z-10">
             Announcements
@@ -101,8 +85,6 @@ export default async function AnnouncementsPage() {
           )}
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }

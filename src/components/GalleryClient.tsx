@@ -4,8 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useState } from 'react'
 import { X, ChevronLeft, ChevronRight, Camera, ZoomIn } from 'lucide-react'
-import { Navbar } from '@/components/Navbar'
-import { Footer } from '@/components/Footer'
 import DarkVeil from '@/components/DarkVeil'
 
 interface GalleryImage {
@@ -88,17 +86,15 @@ export const GalleryClient: React.FC<GalleryClientProps> = ({ images }) => {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans">
-      <Navbar />
-
+    <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans overflow-x-hidden">
       {/* Fixed Background */}
       <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
         <DarkVeil />
       </div>
 
       {/* Hero Section */}
-      <section className="relative z-10 pt-32 pb-20 px-4">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-100 bg-white/5 blur-[120px] rounded-full -z-10" />
+      <section className="relative z-10 pt-32 pb-20 px-4 overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-200 h-[40vh] max-h-100 bg-white/5 blur-[120px] rounded-full -z-10" />
 
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
@@ -271,8 +267,6 @@ export const GalleryClient: React.FC<GalleryClientProps> = ({ images }) => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <Footer />
     </div>
   )
 }

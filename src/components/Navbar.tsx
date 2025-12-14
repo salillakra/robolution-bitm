@@ -21,19 +21,15 @@ const navItems = [
 
 export const Navbar = () => {
   const pathname = usePathname()
-  const [activeTab, setActiveTab] = useState('Home')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
 
-  const handleNavClick = (name: string) => {
-    setActiveTab(name)
+  const handleNavClick = () => {
     setMobileMenuOpen(false)
   }
 
-  useEffect(() => {
-    setActiveTab(pathname)
-  }, [pathname])
+  // No need for useEffect to set activeTab, we'll derive it from pathname directly
 
   // Handle scroll to show/hide navbar
   useEffect(() => {
@@ -75,15 +71,11 @@ export const Navbar = () => {
     <>
       {/* Desktop & Mobile Navbar */}
       <motion.div
-        initial={{ y: -100 }}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 md:pt-6 px-4"
       >
-        <motion.nav
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+        <nav
           className={cn(
             'w-full max-w-7xl flex items-center justify-between p-3 md:p-1 rounded-full border border-white/20',
             'bg-white/10 backdrop-blur-md shadow-lg shadow-black/5',
@@ -92,7 +84,7 @@ export const Navbar = () => {
           {/* Logo */}
           <Link
             href="/"
-            onClick={() => handleNavClick('Home')}
+            onClick={handleNavClick}
             className="flex items-center gap-2 px-3 py-2 cursor-pointer shrink-0"
           >
             <Image
@@ -109,23 +101,26 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.link}
-                onClick={() => handleNavClick(item.name)}
-                className="relative px-4 py-2 text-sm font-medium text-white transition-colors hover:text-white/80"
-              >
-                {activeTab === item.name && (
-                  <motion.div
-                    layoutId="active-pill"
-                    className="absolute inset-0 bg-white/20 rounded-full"
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{item.name}</span>
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive = pathname === item.link
+              return (
+                <Link
+                  key={item.name}
+                  href={item.link}
+                  onClick={handleNavClick}
+                  className="relative px-4 py-2 text-sm font-medium text-white transition-colors hover:text-white/80"
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-pill"
+                      className="absolute inset-0 bg-white/20 rounded-full"
+                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{item.name}</span>
+                </Link>
+              )
+            })}
           </div>
 
           {/* Mobile Menu Button */}
@@ -146,7 +141,7 @@ export const Navbar = () => {
               </motion.div>
             </AnimatePresence>
           </button>
-        </motion.nav>
+        </nav>
       </motion.div>
 
       {/* Mobile Menu Overlay & Content */}
@@ -175,39 +170,42 @@ export const Navbar = () => {
             >
               <div className="bg-linear-to-br from-white/15 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl overflow-hidden">
                 <div className="flex flex-col gap-1 p-3">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.link}
-                      onClick={() => handleNavClick(item.name)}
-                      className={cn(
-                        'relative px-6 py-4 text-base font-semibold rounded-2xl transition-all duration-150',
-                        'active:scale-[0.98]',
-                        activeTab === item.name
-                          ? 'bg-white/25 text-white shadow-lg shadow-white/10'
-                          : 'text-white/80 hover:text-white hover:bg-white/10',
-                      )}
-                    >
-                      {activeTab === item.name && (
-                        <motion.div
-                          layoutId="mobile-active"
-                          className="absolute inset-0 bg-white/20 rounded-2xl"
-                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                        />
-                      )}
-                      <span className="relative z-10 flex items-center justify-between">
-                        {item.name}
-                        {activeTab === item.name && (
+                  {navItems.map((item) => {
+                    const isActive = pathname === item.link
+                    return (
+                      <Link
+                        key={item.name}
+                        href={item.link}
+                        onClick={handleNavClick}
+                        className={cn(
+                          'relative px-6 py-4 text-base font-semibold rounded-2xl transition-all duration-150',
+                          'active:scale-[0.98]',
+                          isActive
+                            ? 'bg-white/25 text-white shadow-lg shadow-white/10'
+                            : 'text-white/80 hover:text-white hover:bg-white/10',
+                        )}
+                      >
+                        {isActive && (
                           <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ duration: 0.2 }}
-                            className="w-2 h-2 rounded-full bg-white"
+                            layoutId="mobile-active"
+                            className="absolute inset-0 bg-white/20 rounded-2xl"
+                            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                           />
                         )}
-                      </span>
-                    </Link>
-                  ))}
+                        <span className="relative z-10 flex items-center justify-between">
+                          {item.name}
+                          {isActive && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ duration: 0.2 }}
+                              className="w-2 h-2 rounded-full bg-white"
+                            />
+                          )}
+                        </span>
+                      </Link>
+                    )
+                  })}
                 </div>
               </div>
             </motion.div>

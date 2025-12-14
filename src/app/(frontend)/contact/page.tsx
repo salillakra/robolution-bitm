@@ -1,5 +1,3 @@
-import { Navbar } from '@/components/Navbar'
-import { Footer } from '@/components/Footer'
 import DarkVeil from '@/components/DarkVeil'
 import { Mail, MapPin, Linkedin, Github, Instagram, Facebook } from 'lucide-react'
 import { getPayload } from 'payload'
@@ -68,8 +66,6 @@ export default async function ContactPage() {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans overflow-x-hidden">
-      <Navbar />
-
       {/* Fixed Background */}
       <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
         <DarkVeil />
@@ -243,8 +239,6 @@ export default async function ContactPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

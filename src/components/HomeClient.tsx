@@ -17,10 +17,8 @@ import {
   LockIcon,
 } from 'lucide-react'
 import Link from 'next/link'
-import { Footer } from '@/components/Footer'
 import CountUp from '@/components/CountUp'
 import { motion } from 'framer-motion'
-import { Navbar } from '@/components/Navbar'
 import { SponsorsSection } from '@/components/SponsorsSection'
 import { GalleryPreview } from '@/components/GalleryPreview'
 
@@ -101,8 +99,6 @@ const HomeClient: React.FC<HomeClientProps> = ({ sponsors, galleryImages }) => {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans overflow-x-hidden">
-      <Navbar />
-
       {/* Fixed Background */}
       <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
         <DarkVeil />
@@ -456,8 +452,6 @@ const HomeClient: React.FC<HomeClientProps> = ({ sponsors, galleryImages }) => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

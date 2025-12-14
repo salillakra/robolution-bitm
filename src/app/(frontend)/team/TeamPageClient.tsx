@@ -3,8 +3,6 @@
 import React from 'react'
 import { FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa'
 import { IoIosMail } from 'react-icons/io'
-import { Navbar } from '@/components/Navbar'
-import { Footer } from '@/components/Footer'
 import DarkVeil from '@/components/DarkVeil'
 import Image from 'next/image'
 
@@ -243,8 +241,6 @@ export default function TeamPageClient({ members }: TeamPageClientProps) {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans relative overflow-x-hidden">
-      <Navbar />
-
       {/* Fixed Background */}
       <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
         <DarkVeil />
@@ -334,7 +330,6 @@ export default function TeamPageClient({ members }: TeamPageClientProps) {
 
         {/* <TimelineSection /> */}
       </div>
-      <Footer />
     </div>
   )
 }

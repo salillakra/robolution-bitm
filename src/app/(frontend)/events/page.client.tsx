@@ -1,7 +1,5 @@
 'use client'
 
-import { Navbar } from '@/components/Navbar'
-import { Footer } from '@/components/Footer'
 import DarkVeil from '@/components/DarkVeil'
 import { motion } from 'framer-motion'
 import { Calendar, MapPin, Users, ExternalLink, Clock } from 'lucide-react'
@@ -61,8 +59,6 @@ const EventsPageClient = ({ events: initialEvents }: EventsPageClientProps) => {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans overflow-x-hidden">
-      <Navbar />
-
       {/* Fixed Background */}
       <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
         <DarkVeil />
@@ -262,8 +258,6 @@ const EventsPageClient = ({ events: initialEvents }: EventsPageClientProps) => {
           </Link>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

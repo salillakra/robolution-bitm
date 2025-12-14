@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
+import { ClientLayout } from '@/components/ClientLayout'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -37,7 +38,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <ClientLayout>{children}</ClientLayout>
           </ThemeProvider>
         </main>
       </body>

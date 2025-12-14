@@ -49,20 +49,9 @@ export default async function PrivacyPolicyPage() {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans">
-      <header className="border-b border-white/10 backdrop-blur-lg bg-black/50 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <Link
-            href="/"
-            className="items-center text-white/60 flex hover:text-white transition-colors text-sm"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
-          </Link>
-        </div>
-      </header>
-
-      <main className="max-w-4xl mx-auto px-4 py-16 md:py-24">
+      <main className="max-w-4xl mx-auto px-4 py-16 md:py-20">
         {/* Title */}
-        <div className="mb-12 text-center">
+        <div className="mb-12 text-center mt-24">
           <h1 className="text-5xl md:text-6xl font-black mb-6 bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40">
             {policy.title}
           </h1>
@@ -153,8 +142,6 @@ export default async function PrivacyPolicyPage() {
           Last updated: {formatDate(policy.updatedAt)}
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }
