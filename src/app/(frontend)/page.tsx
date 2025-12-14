@@ -1,361 +1,138 @@
-'use client'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
+import HomeClient from '@/components/HomeClient'
+import type { Sponsor, Media, Gallery as GalleryType } from '@/payload-types'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import React from 'react'
-import DarkVeil from '@/components/DarkVeil'
-import {
-  Users,
-  Trophy,
-  Zap,
-  Code2,
-  Cpu,
-  Mail,
-  Linkedin,
-  PlusIcon,
-  Send,
-  LockIcon,
-} from 'lucide-react'
-import Link from 'next/link'
-import { Footer } from '@/components/Footer'
-import CountUp from '@/components/CountUp'
-import { motion } from 'framer-motion'
-import { Navbar } from '@/components/Navbar'
-
-const stats = [
-  { label: 'Audience Reach', value: 5000, icon: Users },
-  { label: 'Industry Partners', value: 50, icon: Zap },
-  { label: 'Workshops', value: 20, icon: Code2 },
-  { label: 'Team Members', value: 100, icon: Trophy },
-]
-
-const Page = () => {
-  return (
-    <div className="min-h-screen bg-black text-white selection:bg-white/20 font-sans">
-      <Navbar />
-
-      {/* Fixed Background */}
-      <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
-        <DarkVeil />
-      </div>
-
-      {/* Hero Section */}
-      <section className="relative z-10 h-screen flex flex-col items-center justify-center text-center p-4">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-100 bg-white/5 blur-[120px] rounded-full -z-10" />
-
-        <p className="text-sm md:text-base uppercase tracking-[0.3em] mb-6 text-white/50 border border-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
-          Est. 2001 • BIT Mesra
-        </p>
-
-        <div className="overflow-hidden mb-4">
-          <motion.h1
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            transition={{ ease: 'linear', duration: 0.3 }}
-            className="text-6xl md:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40 pb-2"
-          >
-            ROBOLUTION
-          </motion.h1>
-        </div>
-
-        <p className="text-xl md:text-3xl text-white/70 mb-10 font-light max-w-3xl leading-relaxed">
-          Pioneering Innovation. Redefining Robotics.
-          <span className="block text-base md:text-lg text-white/40 mt-2 font-normal">
-            The Official Robotics Club of BIT Mesra
-          </span>
-        </p>
-
-        <div className="flex gap-4">
-          <Link href="/about">
-            <Button className="rounded-full px-8 py-6 text-lg font-semibold bg-white text-black hover:bg-gray-100 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-white/20">
-              About Us
-            </Button>
-          </Link>
-          <Link href="/contact">
-            <Button
-              variant="outline"
-              className="rounded-full bg-transparent px-8 py-6 text-lg font-semibold border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-sm"
-            >
-              Contact Us
-            </Button>
-          </Link>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="relative z-10 py-32 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                A Legacy of <br />
-                <span className="text-white/50">Excellence and Innovation.</span>
-              </h2>
-              <div className="space-y-6 text-lg text-white/60 leading-relaxed">
-                <p>
-                  Founded in 2001, <strong>Robolution</strong> stands as a center of innovation and
-                  teamwork, blending mechanics, electronics, and programming. We nurture a spirit of
-                  innovation that turns concepts into real-world creations.
-                </p>
-                <p>
-                  We proudly represent BIT Mesra as <strong>Team Pratyunmis</strong> at ABU ROBOCON,
-                  arguably the most prestigious international robotics contest. In 2021, we made
-                  history by earning a perfect score of 100 in 3D design analysis.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, i) => (
-                <div
-                  key={i}
-                  className="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm hover:bg-white/10 transition-colors group"
-                >
-                  <stat.icon className="w-8 h-8 mb-4 text-white/50 group-hover:text-white transition-colors" />
-                  <div className="text-3xl font-bold mb-1 flex items-center">
-                    <CountUp
-                      from={0}
-                      to={stat.value}
-                      // separator=","
-                      direction="up"
-                      duration={0.5}
-                      delay={0.1}
-                      startWhen={true}
-                      className="count-up-text"
-                    />
-                    <PlusIcon className="font-bold h-7 w-7" />
-                  </div>
-                  <div className="text-sm text-white/50 uppercase tracking-wider">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* What We Do Section */}
-      <section className="relative z-10 py-32 px-4 bg-black/50 backdrop-blur-lg border-y border-white/5">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">What We Do</h2>
-            <p className="text-xl text-white/50 max-w-2xl mx-auto">
-              Fostering technical skills and innovation through hands-on learning and competition.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="relative group">
-              <div className="absolute inset-0 bg-linear-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-              <div className="relative bg-black/40 border border-white/10 p-8 rounded-3xl h-full backdrop-blur-md">
-                <Code2 className="w-10 h-10 mb-6 text-white" />
-                <h3 className="text-2xl font-bold mb-3">Workshops & Training</h3>
-                <p className="text-white/60">
-                  Regular hands-on sessions on mechanics, electronics, and coding to skill up
-                  students from scratch.
-                </p>
-              </div>
-            </div>
-            <div className="relative group">
-              <div className="absolute inset-0 bg-linear-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-              <div className="relative bg-black/40 border border-white/10 p-8 rounded-3xl h-full backdrop-blur-md">
-                <Trophy className="w-10 h-10 mb-6 text-white" />
-                <h3 className="text-2xl font-bold mb-3">RoboSaga</h3>
-                <p className="text-white/60">
-                  Our flagship 3-day annual techno-management fest featuring hackathons,
-                  exhibitions, and robot wars.
-                </p>
-              </div>
-            </div>
-            <div className="relative group">
-              <div className="absolute inset-0 bg-linear-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-              <div className="relative bg-black/40 border border-white/10 p-8 rounded-3xl h-full backdrop-blur-md">
-                <Cpu className="w-10 h-10 mb-6 text-white" />
-                <h3 className="text-2xl font-bold mb-3">Projects & Research</h3>
-                <p className="text-white/60">
-                  Building industry-grade robots, participating in ABU ROBOCON, and pioneering new
-                  tech solutions.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Since 2001 Legacy Section - EXPANDED */}
-      <section className="relative z-10 py-40 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-b from-black via-white/5 to-black" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-white/10 blur-[150px] rounded-full" />
-
-        <div className="max-w-7xl mx-auto text-center relative">
-          {/* Main Year Display */}
-          <div className="mb-16">
-            <div className="inline-block mb-8">
-              <p className="text-sm md:text-base uppercase tracking-[0.5em] text-white/50 mb-2 font-semibold">
-                Proudly Established
-              </p>
-              <div className="h-px w-32 mx-auto bg-linear-to-r from-transparent via-white/30 to-transparent" />
-            </div>
-
-            <div className="relative inline-block mb-12">
-              <div className="absolute inset-0 bg-white/20 blur-[120px] animate-pulse" />
-              <h2 className="relative text-[140px] md:text-[280px] font-black tracking-tighter leading-none bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/20 drop-shadow-2xl">
-                2001
-              </h2>
-            </div>
-
-            <p className="text-2xl md:text-4xl text-white font-light mb-6 max-w-4xl mx-auto leading-relaxed">
-              Over <span className="font-bold text-white">two decades</span> of pioneering
-              innovation in robotics
-            </p>
-            <p className="text-lg md:text-xl text-white/50 max-w-3xl mx-auto">
-              From humble beginnings to becoming one of India&apos;s premier robotics clubs,
-              we&apos;ve been at the forefront of technological advancement.
-            </p>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto mb-16">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm hover:bg-white/10 transition-all hover:scale-105">
-              <div className="text-5xl md:text-6xl font-black text-white mb-3">24+</div>
-              <div className="text-sm text-white/60 uppercase tracking-wider font-semibold">
-                Years of Excellence
-              </div>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm hover:bg-white/10 transition-all hover:scale-105">
-              <div className="text-5xl md:text-6xl font-black text-white mb-3">1000+</div>
-              <div className="text-sm text-white/60 uppercase tracking-wider font-semibold">
-                Students Trained
-              </div>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm hover:bg-white/10 transition-all hover:scale-105">
-              <div className="text-5xl md:text-6xl font-black text-white mb-3">50+</div>
-              <div className="text-sm text-white/60 uppercase tracking-wider font-semibold">
-                Competitions Won
-              </div>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm hover:bg-white/10 transition-all hover:scale-105">
-              <div className="text-5xl md:text-6xl font-black text-white mb-3">∞</div>
-              <div className="text-sm text-white/60 uppercase tracking-wider font-semibold">
-                Innovation
-              </div>
-            </div>
-          </div>
-
-          {/* Timeline Highlights */}
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <div className="bg-linear-to-br from-white/10 to-white/5 border border-white/10 rounded-3xl p-8 text-left backdrop-blur-md">
-              <div className="text-4xl font-bold text-white/90 mb-3">2001</div>
-              <h4 className="text-xl font-bold text-white mb-2">Foundation</h4>
-              <p className="text-white/60">
-                Robolution was established as BIT Mesra&apos;s official robotics club
-              </p>
-            </div>
-            <div className="bg-linear-to-br from-white/10 to-white/5 border border-white/10 rounded-3xl p-8 text-left backdrop-blur-md">
-              <div className="text-4xl font-bold text-white/90 mb-3">2021</div>
-              <h4 className="text-xl font-bold text-white mb-2">Perfect Score</h4>
-              <p className="text-white/60">Achieved 100/100 in 3D design analysis at ABU ROBOCON</p>
-            </div>
-            <div className="bg-linear-to-br from-white/10 to-white/5 border border-white/10 rounded-3xl p-8 text-left backdrop-blur-md">
-              <div className="text-4xl font-bold text-white/90 mb-3">2025</div>
-              <h4 className="text-xl font-bold text-white mb-2">Future Forward</h4>
-              <p className="text-white/60">
-                Continuing to push boundaries in robotics and innovation
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Join the Revolution CTA */}
-      <section className="relative z-10 py-32 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-bold mb-8">Join the Revolution</h2>
-          <p className="text-xl md:text-2xl text-white/70 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Whether you&apos;re a curious beginner or a seasoned pro, Robolution offers a platform
-            to learn, build, and innovate together.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Link href="mailto:pratyumnis@bitmesra.ac.in">
-              <Button className="gap-3 bg-linear-to-r from-white to-gray-200 text-black shadow-lg shadow-white/20 hover:shadow-xl hover:shadow-white/30 rounded-full px-10 py-7 text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95">
-                <Mail className="w-5 h-5" />
-                Contact Us
-              </Button>
-            </Link>
-            <Link href="https://www.linkedin.com/company/robolution-bit-mesra">
-              <Button
-                variant="outline"
-                className="gap-3 border-white/30 bg-white/5 text-white shadow-md shadow-white/5 hover:bg-white/10 hover:border-white/50 hover:shadow-lg hover:shadow-white/10 rounded-full px-10 py-7 text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-sm"
-              >
-                <Linkedin className="w-5 h-5" />
-                Follow Us
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Section - GRAND & SEPARATE */}
-      <section className="relative z-10 py-32 px-4 overflow-hidden border-y border-white/10">
-        <div className="absolute inset-0 bg-linear-to-b from-transparent via-white/5 to-transparent" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white/10 blur-[120px] rounded-full" />
-
-        <div className="max-w-5xl mx-auto text-center relative">
-          <div className="mb-12">
-            <div className="inline-block mb-6">
-              <span className="text-sm uppercase tracking-[0.4em] text-white/50 font-semibold">
-                Newsletter
-              </span>
-            </div>
-            <h2 className="text-5xl md:text-7xl font-black mb-6 leading-tight">Stay in the Loop</h2>
-            <p className="text-xl md:text-2xl text-white/60 max-w-3xl mx-auto leading-relaxed">
-              Get exclusive updates on workshops, competitions, tech talks, and behind-the-scenes
-              content from Robolution. Join our community of innovators.
-            </p>
-          </div>
-
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-white/5 border border-white/20 rounded-3xl p-8 md:p-12 backdrop-blur-xl">
-              <div className="flex flex-col md:flex-row gap-4">
-                <Input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:border-white/40 h-14 md:h-16 text-lg px-6 rounded-2xl"
-                />
-                <Button className="h-14 md:h-16 px-10 bg-white text-black hover:bg-gray-100 font-bold text-lg shrink-0 rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-white/20 hover:shadow-xl hover:shadow-white/30">
-                  <Send className="w-5 h-5 mr-2" />
-                  Subscribe
-                </Button>
-              </div>
-              <p className="text-white/40 flex text-sm mt-6">
-                <LockIcon className="w-5 h-5 mr-2" /> We respect your privacy. Unsubscribe anytime.
-              </p>
-            </div>
-
-            {/* Social Proof */}
-            <div className="mt-10 flex items-center justify-center gap-8 flex-wrap">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-white">500+</div>
-                <div className="text-xs text-white/50 uppercase tracking-wider">Subscribers</div>
-              </div>
-              <div className="h-8 w-px bg-white/20" />
-              <div className="text-center">
-                <div className="text-2xl font-bold text-white">Weekly</div>
-                <div className="text-xs text-white/50 uppercase tracking-wider">Updates</div>
-              </div>
-              <div className="h-8 w-px bg-white/20" />
-              <div className="text-center">
-                <div className="text-2xl font-bold text-white">100%</div>
-                <div className="text-xs text-white/50 uppercase tracking-wider">Free</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
-  )
+interface TransformedSponsor {
+  id: string
+  name: string
+  logo: {
+    url: string
+    alt?: string
+    width?: number
+    height?: number
+  }
+  website?: string
+  description?: string
+  active: boolean
+  order: number
 }
 
-export default Page
+interface TransformedGalleryImage {
+  id: string
+  title: string
+  image: {
+    url: string
+    alt?: string
+    width?: number
+    height?: number
+  }
+  category?: string
+}
+
+async function getSponsors(): Promise<TransformedSponsor[]> {
+  try {
+    const payload = await getPayload({ config })
+
+    const sponsors = await payload.find({
+      collection: 'sponsors',
+      where: {
+        active: {
+          equals: true,
+        },
+      },
+      sort: 'order',
+      limit: 100,
+    })
+
+    // Transform the data to match the expected format
+    const transformedSponsors: TransformedSponsor[] = sponsors.docs.map((sponsor: Sponsor) => {
+      const logo = typeof sponsor.logo === 'number' ? null : (sponsor.logo as Media)
+
+      return {
+        id: sponsor.id.toString(),
+        name: sponsor.name,
+        logo: logo
+          ? {
+              url: logo.url || '',
+              alt: logo.alt || sponsor.name,
+              width: logo.width || undefined,
+              height: logo.height || undefined,
+            }
+          : {
+              url: '',
+              alt: sponsor.name,
+            },
+        website: sponsor.website || undefined,
+        description: sponsor.description || undefined,
+        active: sponsor.active ?? true,
+        order: sponsor.order ?? 0,
+      }
+    })
+
+    return transformedSponsors
+  } catch (error) {
+    console.error('Error fetching sponsors:', error)
+    return []
+  }
+}
+
+async function getGalleryImages(): Promise<TransformedGalleryImage[]> {
+  try {
+    const payload = await getPayload({ config })
+
+    // Get featured gallery images for homepage preview
+    const gallery = await payload.find({
+      collection: 'gallery',
+      where: {
+        and: [
+          {
+            active: {
+              equals: true,
+            },
+          },
+          {
+            featured: {
+              equals: true,
+            },
+          },
+        ],
+      },
+      sort: 'order',
+      limit: 6,
+    })
+
+    const transformedImages: TransformedGalleryImage[] = gallery.docs.map((item: GalleryType) => {
+      const image = typeof item.image === 'number' ? null : (item.image as Media)
+
+      return {
+        id: item.id.toString(),
+        title: item.title,
+        image: image
+          ? {
+              url: image.url || '',
+              alt: image.alt || item.title,
+              width: image.width || undefined,
+              height: image.height || undefined,
+            }
+          : {
+              url: '',
+              alt: item.title,
+            },
+        category: item.category || undefined,
+      }
+    })
+
+    return transformedImages
+  } catch (error) {
+    console.error('Error fetching gallery images:', error)
+    return []
+  }
+}
+
+export default async function Page() {
+  const sponsors = await getSponsors()
+  const galleryImages = await getGalleryImages()
+
+  return <HomeClient sponsors={sponsors} galleryImages={galleryImages} />
+}

@@ -75,6 +75,9 @@ export interface Config {
     events: Event;
     'about-us': AboutUs;
     annoucement: Annoucement;
+    sponsors: Sponsor;
+    gallery: Gallery;
+    newsletter: Newsletter;
     forms: Form;
     'form-submissions': FormSubmission;
     'payload-kv': PayloadKv;
@@ -92,6 +95,9 @@ export interface Config {
     events: EventsSelect<false> | EventsSelect<true>;
     'about-us': AboutUsSelect<false> | AboutUsSelect<true>;
     annoucement: AnnoucementSelect<false> | AnnoucementSelect<true>;
+    sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
+    newsletter: NewsletterSelect<false> | NewsletterSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -572,6 +578,81 @@ export interface Annoucement {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sponsors".
+ */
+export interface Sponsor {
+  id: number;
+  name: string;
+  logo: number | Media;
+  website?: string | null;
+  description?: string | null;
+  /**
+   * Only active sponsors will be displayed on the website
+   */
+  active?: boolean | null;
+  /**
+   * Lower numbers appear first
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: number;
+  /**
+   * Descriptive title for the image
+   */
+  title: string;
+  image: number | Media;
+  /**
+   * Optional caption for the image
+   */
+  caption?: string | null;
+  /**
+   * Categorize the image for filtering
+   */
+  category?: ('competition' | 'workshop' | 'event' | 'team' | 'project' | 'other') | null;
+  /**
+   * Featured images will appear in the homepage gallery preview
+   */
+  featured?: boolean | null;
+  /**
+   * Lower numbers appear first
+   */
+  order?: number | null;
+  /**
+   * Only active images will be displayed
+   */
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Newsletter subscription emails
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter".
+ */
+export interface Newsletter {
+  id: number;
+  /**
+   * Subscriber email address
+   */
+  email: string;
+  /**
+   * Whether the subscription is active
+   */
+  active?: boolean | null;
+  subscribedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "forms".
  */
 export interface Form {
@@ -835,6 +916,18 @@ export interface PayloadLockedDocument {
         value: number | Annoucement;
       } | null)
     | ({
+        relationTo: 'sponsors';
+        value: number | Sponsor;
+      } | null)
+    | ({
+        relationTo: 'gallery';
+        value: number | Gallery;
+      } | null)
+    | ({
+        relationTo: 'newsletter';
+        value: number | Newsletter;
+      } | null)
+    | ({
         relationTo: 'forms';
         value: number | Form;
       } | null)
@@ -1089,6 +1182,46 @@ export interface AboutUsSelect<T extends boolean = true> {
 export interface AnnoucementSelect<T extends boolean = true> {
   title?: T;
   content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sponsors_select".
+ */
+export interface SponsorsSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  website?: T;
+  description?: T;
+  active?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  caption?: T;
+  category?: T;
+  featured?: T;
+  order?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter_select".
+ */
+export interface NewsletterSelect<T extends boolean = true> {
+  email?: T;
+  active?: T;
+  subscribedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

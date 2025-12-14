@@ -14,6 +14,9 @@ import { TeamMembers } from './collections/TeamMembers'
 import { Events } from './collections/Events'
 import { AboutUs } from './collections/AboutUs'
 import { Annoucement } from './collections/Annoucement'
+import { Sponsors } from './collections/Sponsors'
+import { Gallery } from './collections/Gallery'
+import { Newsletter } from './collections/Newsletter'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -39,6 +42,9 @@ export default buildConfig({
     Events,
     AboutUs,
     Annoucement,
+    Sponsors,
+    Gallery,
+    Newsletter,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

@@ -1,7 +1,7 @@
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import DarkVeil from '@/components/DarkVeil'
-import { Mail, MapPin, Linkedin, Github, Instagram } from 'lucide-react'
+import { Mail, MapPin, Linkedin, Github, Instagram, Facebook } from 'lucide-react'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import ContactForm from './ContactForm'
@@ -53,15 +53,15 @@ export default async function ContactPage() {
       color: 'hover:bg-blue-500/20 hover:border-blue-500/50',
     },
     {
-      icon: Github,
-      name: 'GitHub',
-      link: 'https://github.com/robolution-bitmesra',
+      icon: Facebook,
+      name: 'Facebook',
+      link: 'https://www.facebook.com/TeamRobolution',
       color: 'hover:bg-purple-500/20 hover:border-purple-500/50',
     },
     {
       icon: Instagram,
       name: 'Instagram',
-      link: 'https://instagram.com/robolution_bitmesra',
+      link: 'https://instagram.com/robolution.bitm',
       color: 'hover:bg-pink-500/20 hover:border-pink-500/50',
     },
   ]

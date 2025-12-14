@@ -3,7 +3,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html,
+body {
+  scroll-behavior: smooth;
+}
+
 :root {
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-space-grotesk), system-ui, -apple-system, sans-serif;
   --font-mono: 'Roboto Mono', monospace;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
