@@ -61,8 +61,18 @@ vec4 cppn_fn(vec2 coordinate,float in0,float in1,float in2){
 void mainImage(out vec4 fragColor,in vec2 fragCoord){
     vec2 uv=fragCoord/uResolution.xy*2.-1.;
     uv.y*=-1.;
-    uv+=uWarp*vec2(sin(uv.y*6.283+uTime*0.5),cos(uv.x*6.283+uTime*0.5))*0.05;
-    fragColor=cppn_fn(uv,0.1*sin(0.3*uTime),0.1*sin(0.69*uTime),0.1*sin(0.44*uTime));
+    
+    // more motion💪
+    float warpX = sin(uv.y*6.283+uTime*0.5) * cos(uv.y*3.14+uTime*0.3);
+    float warpY = cos(uv.x*6.283+uTime*0.5) * sin(uv.x*3.14+uTime*0.4);
+    uv+=uWarp*vec2(warpX, warpY)*0.05;
+    
+    //breathing effect
+    float t1 = 0.15*sin(0.3*uTime);
+    float t2 = 0.15*sin(0.69*uTime + 1.5);
+    float t3 = 0.15*sin(0.44*uTime + 3.0);
+    
+    fragColor=cppn_fn(uv, t1, t2, t3);
 }
 
 void main(){
@@ -87,11 +97,11 @@ type Props = {
 
 export default function DarkVeil({
   hueShift = 0,
-  noiseIntensity = 0,
+  noiseIntensity = 0.02,
   scanlineIntensity = 0,
-  speed = 0.5,
+  speed = 1.2,
   scanlineFrequency = 0,
-  warpAmount = 0,
+  warpAmount = 0.8,
   resolutionScale = 1,
 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null)
