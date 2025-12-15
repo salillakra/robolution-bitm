@@ -20,14 +20,15 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Robolution | BIT Mesra | Robotics Club of BIT Mesra',
-    template: '%s | Robolution BIT Mesra',
+    default: 'Robolution | BIT Mesra | Team Pratyumnis',
+    template: '%s | Robolution | BIT Mesra | Team Pratyumnis',
   },
   description:
-    'Robolution is the official robotics and innovation club of BIT Mesra. We build robots, compete nationally, and push hands-on engineering through workshops, projects, and tech events.',
+    'Robolution is the official robotics and innovation club of BIT Mesra. also known as Team Pratyumnis. We build robots, compete nationally, and push hands-on engineering through workshops, projects, and tech events.',
   keywords: [
     'Robolution',
     'BIT Mesra',
+    'Team Pratyumnis',
     'Robotics Club',
     'Engineering Club',
     'Robotics Society',
@@ -35,19 +36,19 @@ export const metadata: Metadata = {
     'BIT Mesra Robotics',
     'Tech Club',
   ],
-  authors: [{ name: 'Robolution BIT Mesra' }],
-  creator: 'Robolution BIT Mesra',
+  authors: [{ name: 'Robolution | BIT Mesra | Team Pratyumnis' }],
+  creator: 'Robolution | BIT Mesra | Team Pratyumnis',
   openGraph: {
-    title: 'Robolution | Robotics Club of BIT Mesra',
+    title: 'Robolution | BIT Mesra | Team Pratyumnis',
     description:
-      'Official robotics club of BIT Mesra focused on innovation, competitions, and real-world engineering.',
+      'Robolution is the official robotics and innovation club of BIT Mesra. also known as Team Pratyumnis. We build robots, compete nationally, and push hands-on engineering through workshops, projects, and tech events.',
     siteName: 'Robolution',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Robolution | BIT Mesra | Robotics Club of BIT Mesra',
+        alt: 'Robolution | BIT Mesra | Team Pratyumnis',
       },
     ],
     locale: 'en_IN',
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Robolution | Robotics Club of BIT Mesra',
+    title: 'Robolution | BIT Mesra | Team Pratyumnis',
     description: 'Building robots. Competing hard. Learning engineering the real way.',
     images: ['/og-image.png'],
   },
