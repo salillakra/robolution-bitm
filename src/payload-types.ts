@@ -573,6 +573,10 @@ export interface Annoucement {
     };
     [k: string]: unknown;
   };
+  /**
+   * Only one announcement can be live at a time. Setting this to true will automatically set all other announcements to not live.
+   */
+  isLive?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1182,6 +1186,7 @@ export interface AboutUsSelect<T extends boolean = true> {
 export interface AnnoucementSelect<T extends boolean = true> {
   title?: T;
   content?: T;
+  isLive?: T;
   updatedAt?: T;
   createdAt?: T;
 }

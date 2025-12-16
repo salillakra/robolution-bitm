@@ -8,9 +8,9 @@ export default async function AnnouncementsPage() {
   const payload = await getPayload({ config })
 
   const { docs: announcements } = await payload.find({
-    collection: 'annoucement', // Matching the slug in Annoucement.ts
+    collection: 'annoucement',
     limit: 50,
-    sort: '-createdAt',
+    sort: '-isLive,-createdAt', // Show live announcements first, then sort by date
   })
 
   // render content
@@ -49,36 +49,47 @@ export default async function AnnouncementsPage() {
               <p className="text-white/40 text-lg">No announcements at the moment.</p>
             </div>
           ) : (
-            processedAnnouncements.map((item) => (
-              <article
-                key={item.id}
-                className="group relative bg-black/40 border border-white/10 rounded-3xl p-8 md:p-10 backdrop-blur-md overflow-hidden hover:border-indigo-500/30 transition-colors duration-500"
-              >
-                {/* Glow effect on hover */}
-                <div className="absolute -inset-px bg-linear-to-r from-indigo-500/0 via-indigo-500/10 to-indigo-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            processedAnnouncements
+              .filter((item) => item.isLive)
+              .map((item) => (
+                <article
+                  key={item.id}
+                  className="group relative bg-black/40 border border-white/10 rounded-3xl p-8 md:p-10 backdrop-blur-md overflow-hidden hover:border-indigo-500/30 transition-colors duration-500"
+                >
+                  {/* Glow effect on hover */}
+                  <div className="absolute -inset-px bg-linear-to-r from-indigo-500/0 via-indigo-500/10 to-indigo-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                <div className="relative z-10">
-                  <header className="mb-8">
-                    <div className="flex items-center gap-4 mb-4 text-xs font-mono tracking-wider text-indigo-300/80">
-                      <span className="bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
-                        ANNOUNCEMENT
-                      </span>
-                      {item.createdAt && <span>{formatDate(item.createdAt)}</span>}
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-white group-hover:text-indigo-200 transition-colors duration-300">
-                      {item.title}
-                    </h2>
-                  </header>
+                  <div className="relative z-10">
+                    <header className="mb-8">
+                      <div className="flex items-center gap-4 mb-4 text-xs font-mono tracking-wider text-indigo-300/80">
+                        <span className="bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
+                          ANNOUNCEMENT
+                        </span>
+                        {item.isLive && (
+                          <span className="bg-red-500/20 px-3 py-1 rounded-full border border-red-500/40 text-red-400 flex items-center gap-2">
+                            <span className="relative flex h-2 w-2">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                            </span>
+                            LIVE
+                          </span>
+                        )}
+                        {item.createdAt && <span>{formatDate(item.createdAt)}</span>}
+                      </div>
+                      <h2 className="text-3xl md:text-4xl font-bold text-white group-hover:text-indigo-200 transition-colors duration-300">
+                        {item.title}
+                      </h2>
+                    </header>
 
-                  <div
-                    className="prose prose-invert prose-lg max-w-none text-white/70 prose-headings:text-white prose-a:text-indigo-400 hover:prose-a:text-indigo-300 prose-strong:text-white prose-code:text-indigo-200 prose-pre:bg-white/5 prose-pre:border prose-pre:border-white/10"
-                    dangerouslySetInnerHTML={{
-                      __html: item.contentHtml,
-                    }}
-                  />
-                </div>
-              </article>
-            ))
+                    <div
+                      className="prose prose-invert prose-lg max-w-none text-white/70 prose-headings:text-white prose-a:text-indigo-400 hover:prose-a:text-indigo-300 prose-strong:text-white prose-code:text-indigo-200 prose-pre:bg-white/5 prose-pre:border prose-pre:border-white/10"
+                      dangerouslySetInnerHTML={{
+                        __html: item.contentHtml,
+                      }}
+                    />
+                  </div>
+                </article>
+              ))
           )}
         </div>
       </main>

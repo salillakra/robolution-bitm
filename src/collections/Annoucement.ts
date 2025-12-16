@@ -10,13 +10,35 @@ export const Annoucement: CollectionConfig = {
   slug: 'annoucement',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'content'],
+    defaultColumns: ['title', 'isLive', 'createdAt'],
   },
   access: {
     read: () => true,
     create: ({ req: { user } }) => !!user, // Only authenticated users can create
     update: ({ req: { user } }) => !!user,
     delete: ({ req: { user } }) => !!user,
+  },
+  hooks: {
+    beforeChange: [
+      async ({ data, req }) => {
+        // If this announcement is being set to live
+        if (data.isLive === true) {
+          // Set all other announcements to not live
+          await req.payload.update({
+            collection: 'annoucement',
+            where: {
+              id: {
+                not_equals: data.id,
+              },
+            },
+            data: {
+              isLive: false,
+            },
+          })
+        }
+        return data
+      },
+    ],
   },
   fields: [
     {
@@ -36,6 +58,17 @@ export const Annoucement: CollectionConfig = {
         ],
       }),
       required: true,
+    },
+    {
+      name: 'isLive',
+      type: 'checkbox',
+      label: 'Is Live',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description:
+          'Only one announcement can be live at a time. Setting this to true will automatically set all other announcements to not live.',
+      },
     },
   ],
 }
