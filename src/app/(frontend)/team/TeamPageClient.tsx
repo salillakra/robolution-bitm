@@ -3,8 +3,10 @@
 import React from 'react'
 import { FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa'
 import { IoIosMail } from 'react-icons/io'
+import { Card, CardContent } from '@/components/ui/card'
 import DarkVeil from '@/components/DarkVeil'
 import Image from 'next/image'
+import { cn } from '@/lib/utils'
 
 // Define types for better type safety
 interface Socials {
@@ -29,7 +31,7 @@ interface TeamPageClientProps {
   members: Member[]
 }
 
-const MemberCard = ({ member }: { member: Member }) => {
+const MemberCard = ({ member, className }: { member: Member; className?: string }) => {
   if (!member) return null
 
   // Helper to determine image source
@@ -39,93 +41,104 @@ const MemberCard = ({ member }: { member: Member }) => {
   }
 
   return (
-    <div className="group relative flex flex-col items-center py-6 m-2 md:m-4 w-full max-w-[280px] sm:w-60 md:w-64 h-auto bg-white/5 backdrop-blur-md shadow-xl rounded-3xl transform transition-all duration-300 hover:scale-105 border border-white/10 hover:bg-white/10">
-      <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mb-4">
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={member.name}
-            fill
-            className="rounded-full border-2 border-white/20 shadow-lg object-cover scale-95 group-hover:scale-100 transition-transform duration-300"
-          />
-        ) : (
-          <div className="w-full h-full rounded-full border-2 border-white/20 shadow-lg bg-gray-800 flex items-center justify-center text-4xl font-bold text-white/20">
-            {member.name.charAt(0)}
-          </div>
-        )}
-      </div>
+    <Card
+      className={cn(
+        'group relative flex flex-col items-center py-6 md:m-2 w-full max-w-xs sm:max-w-md md:max-w-[350px] h-80 transform transition-all duration-300 hover:scale-[1.02] hover:bg-white/10',
+        className,
+      )}
+    >
+      <CardContent className="flex flex-col items-center">
+        <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 mb-4">
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt={member.name}
+              fill
+              className="rounded-full border-2 border-white/20 shadow-lg object-cover scale-95 group-hover:scale-100 transition-transform duration-300"
+            />
+          ) : (
+            <div className="w-full h-full rounded-full border-2 border-white/20 shadow-lg bg-gray-800 flex items-center justify-center text-3xl sm:text-4xl font-bold text-white/20">
+              {member.name.charAt(0)}
+            </div>
+          )}
+        </div>
 
-      <p className="text-lg md:text-xl font-semibold text-white group-hover:text-blue-200 transition-colors duration-300 text-center px-2">
-        {member.name}
-      </p>
-      <p className="text-sm text-gray-400 group-hover:text-white transition-colors duration-300 text-center mb-4 px-2">
-        {member.title}
-      </p>
-      <div className="flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-auto">
-        {member.socials?.linkedin && (
-          <a
-            href={member.socials.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#0077B5] transition-colors duration-200 text-2xl"
-          >
-            <FaLinkedin />
-          </a>
-        )}
-        {member.socials?.instagram && (
-          <a
-            href={member.socials.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#E4405F] transition-colors duration-200 text-2xl"
-          >
-            <FaInstagram />
-          </a>
-        )}
-        {member.socials?.facebook && (
-          <a
-            href={member.socials.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#1877F2] transition-colors duration-200 text-2xl"
-          >
-            <FaFacebook />
-          </a>
-        )}
-        {member.socials?.email && (
-          <a
-            href={`mailto:${member.socials.email}`}
-            className="text-gray-400 hover:text-[#FED853] transition-colors duration-200 text-2xl"
-          >
-            <IoIosMail />
-          </a>
-        )}
-      </div>
-    </div>
+        <p className="text-lg font-semibold text-white group-hover:text-blue-200 transition-colors duration-300 text-center px-2">
+          {member.name}
+        </p>
+        <p className="text-sm text-gray-400 group-hover:text-white transition-colors duration-300 text-center mb-4 px-2">
+          {member.title}
+        </p>
+        <div className="flex space-x-4 mt-auto opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+          {member.socials?.linkedin && (
+            <a
+              href={member.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-[#0077B5] transition-colors duration-200 text-xl sm:text-2xl"
+            >
+              <FaLinkedin />
+            </a>
+          )}
+          {member.socials?.instagram && (
+            <a
+              href={member.socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-[#E4405F] transition-colors duration-200 text-xl sm:text-2xl"
+            >
+              <FaInstagram />
+            </a>
+          )}
+          {member.socials?.facebook && (
+            <a
+              href={member.socials.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-[#1877F2] transition-colors duration-200 text-xl sm:text-2xl"
+            >
+              <FaFacebook />
+            </a>
+          )}
+          {member.socials?.email && (
+            <a
+              href={`mailto:${member.socials.email}`}
+              className="text-gray-400 hover:text-[#FED853] transition-colors duration-200 text-xl sm:text-2xl"
+            >
+              <IoIosMail />
+            </a>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 
 const renderMemberRow = (members: Member[], keyPrefix: string) => {
   if (!members || members.length === 0) return null
   return (
-    <div className="flex flex-wrap justify-center items-stretch gap-6 py-4">
+    <div className="flex flex-wrap justify-center items-stretch gap-4 sm:gap-6 py-2 sm:py-4">
       {members.map((member) => (
-        <MemberCard key={`${keyPrefix}-${member.id}`} member={member} />
+        <MemberCard
+          className="w-full px-6 md:w-64 lg:w-[320px]"
+          key={`${keyPrefix}-${member.id}`}
+          member={member}
+        />
       ))}
     </div>
   )
 }
 
 const HeroSection = () => (
-  <div className="relative w-full h-[50vh] flex items-center justify-center overflow-hidden mb-20">
+  <div className="relative w-full h-[40vh] md:h-[50vh] flex items-center justify-center overflow-hidden mb-12 md:mb-20">
     <div className="relative z-10 text-center px-4">
-      <p className="text-sm md:text-base uppercase tracking-[0.3em] mb-6 text-white/50">
+      <p className="text-xs sm:text-sm md:text-base uppercase tracking-[0.3em] mb-4 md:mb-6 text-white/50">
         The Minds Behind Innovation
       </p>
-      <h2 className="text-5xl sm:text-6xl md:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40 pb-2 px-4">
+      <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40 pb-1 md:pb-2 px-2 md:px-4">
         Our Team
       </h2>
-      <p className="text-base md:text-2xl text-white/60 max-w-2xl mx-auto px-4">
+      <p className="text-sm sm:text-base md:text-2xl text-white/60 max-w-xl md:max-w-2xl mx-auto px-2 md:px-4 mt-2">
         Meet the passionate individuals driving Robolution forward
       </p>
     </div>
@@ -265,54 +278,41 @@ export default function TeamPageClient({ members }: TeamPageClientProps) {
         <DarkVeil />
       </div>
 
-      <div className="relative z-10 pt-24 pb-20">
+      <div className="relative z-10 pt-24 pb-16 md:pb-20">
         <HeroSection />
 
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <p className="text-sm uppercase tracking-[0.4em] text-white/50 mb-4">Meet The Team</p>
+          <div className="text-center mb-10 md:mb-16">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.4em] text-white/50 mb-3 sm:mb-4">
+              Meet The Team
+            </p>
           </div>
         </div>
 
-        <section className="my-20 px-4 max-w-7xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
+        <section className="my-12 md:my-20 px-4 max-w-7xl mx-auto">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center text-white/90 mb-8 md:mb-12 tracking-wide uppercase border-b border-white/10 pb-3 md:pb-4">
             PRESIDENTS
           </h2>
 
-          <div className="space-y-12">
+          <div>
             {/* President - Center */}
             {renderMemberRow(grouped.presidents.president, 'president')}
 
             {/* Vice President and Joint President - Side by side */}
-            <div className="flex flex-wrap justify-center gap-6">
-              {renderMemberRow(grouped.presidents.vicePresident, 'vice-president')}
-              {renderMemberRow(grouped.presidents.jointPresident, 'joint-president')}
+            <div className="flex justify-center">
+              {renderMemberRow(
+                [...grouped.presidents.vicePresident, ...grouped.presidents.jointPresident],
+                'vice-president',
+              )}
             </div>
           </div>
         </section>
-
-        <section className="my-20 px-4 max-w-7xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
-            CAPTAINS
-          </h2>
-
-          <div className="space-y-12">
-            {/* Captain - Center */}
-            {renderMemberRow(grouped.captains.captain, 'captain')}
-
-            {/* Vice Captains - Side by side */}
-            <div className="flex flex-wrap justify-center gap-6">
-              {renderMemberRow(grouped.captains.viceCaptain, 'vice-captain')}
-            </div>
-          </div>
-        </section>
-
-        <section className="my-20 px-4 max-w-7xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
+        <section className="my-12 md:my-20 px-4 max-w-7xl mx-auto">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center text-white/90 mb-8 md:mb-12 tracking-wide uppercase border-b border-white/10 pb-3 md:pb-4">
             SECRETARIES
           </h2>
 
-          <div className="space-y-12">
+          <div>
             {/* General Secretary - Center */}
             {renderMemberRow(grouped.secretaries.generalSecretary, 'general-secretary')}
 
@@ -323,37 +323,37 @@ export default function TeamPageClient({ members }: TeamPageClientProps) {
           </div>
         </section>
 
-        <section className="my-20 px-4 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
+        <section className="my-12 md:my-20 px-4 max-w-7xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-white/90 mb-8 md:mb-12 tracking-wide uppercase border-b border-white/10 pb-3 md:pb-4">
             DESIGN
           </h2>
           {renderMemberRow(grouped.design, 'design')}
 
-          <h2 className="text-3xl font-bold text-center text-white/90 mb-12 mt-16 tracking-wide uppercase border-b border-white/10 pb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-white/90 mb-8 md:mb-12 mt-10 md:mt-16 tracking-wide uppercase border-b border-white/10 pb-3 md:pb-4">
             MANAGEMENT
           </h2>
           {renderMemberRow(grouped.management, 'management')}
         </section>
 
-        <section className="my-20 px-4 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
+        <section className="my-12 md:my-20 px-4 max-w-7xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-white/90 mb-8 md:mb-12 tracking-wide uppercase border-b border-white/10 pb-3 md:pb-4">
             TREASURER
           </h2>
           {renderMemberRow(grouped.treasurer, 'treasurer')}
 
-          <h2 className="text-3xl font-bold text-center text-white/90 mb-12 mt-16 tracking-wide uppercase border-b border-white/10 pb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-white/90 mb-8 md:mb-12 mt-10 md:mt-16 tracking-wide uppercase border-b border-white/10 pb-3 md:pb-4">
             EMBEDDED LEAD
           </h2>
           {renderMemberRow(grouped.embedded, 'embedded')}
         </section>
 
-        <section className="my-20 px-4 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
+        <section className="my-12 md:my-20 px-4 max-w-7xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-white/90 mb-8 md:mb-12 tracking-wide uppercase border-b border-white/10 pb-3 md:pb-4">
             MECHANICAL LEAD
           </h2>
           {renderMemberRow(grouped.mechanical, 'mechanical')}
 
-          <h2 className="text-3xl font-bold text-center text-white/90 mb-12 mt-16 tracking-wide uppercase border-b border-white/10 pb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-white/90 mb-8 md:mb-12 mt-10 md:mt-16 tracking-wide uppercase border-b border-white/10 pb-3 md:pb-4">
             CAD & INVENTORY
           </h2>
           <div className="flex flex-wrap justify-center gap-6">
@@ -363,17 +363,22 @@ export default function TeamPageClient({ members }: TeamPageClientProps) {
           </div>
         </section>
 
-        <section className="my-20 px-4 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-white/90 mb-12 tracking-wide uppercase border-b border-white/10 pb-4">
+        <section className="my-12 md:my-20 px-4 max-w-7xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-white/90 mb-8 md:mb-12 tracking-wide uppercase border-b border-white/10 pb-3 md:pb-4">
             WORKSHOP & SPONSORSHIP
           </h2>
           <div className="flex flex-wrap justify-center gap-6">
-            {renderMemberRow(grouped.workshopSponsorship.webMaster, 'web-master')}
-            {renderMemberRow(grouped.workshopSponsorship.workshop, 'workshop')}
-            {renderMemberRow(grouped.workshopSponsorship.sponsorship, 'sponsorship')}
+            {renderMemberRow(
+              [
+                ...grouped.workshopSponsorship.workshop,
+                ...grouped.workshopSponsorship.sponsorship,
+                ...grouped.workshopSponsorship.webMaster,
+              ],
+              'workshop, sponsorship, web-master',
+            )}
           </div>
 
-          <h2 className="text-3xl font-bold text-center text-white/90 mb-12 mt-16 tracking-wide uppercase border-b border-white/10 pb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-white/90 mb-8 md:mb-12 mt-10 md:mt-16 tracking-wide uppercase border-b border-white/10 pb-3 md:pb-4">
             EXECUTIVES
           </h2>
           {renderMemberRow(grouped.executives, 'executives')}
