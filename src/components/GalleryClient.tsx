@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useState } from 'react'
-import { X, ChevronLeft, ChevronRight, Camera, ZoomIn } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight, Camera, ZoomIn, Loader2 } from 'lucide-react'
 import DarkVeil from '@/components/DarkVeil'
 
 interface GalleryImage {
@@ -24,6 +24,8 @@ interface GalleryClientProps {
 
 export const GalleryClient: React.FC<GalleryClientProps> = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
+  const [isImageLoading, setIsImageLoading] = useState(false)
+  const [imageDirection, setImageDirection] = useState<'left' | 'right' | null>(null)
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -69,12 +71,16 @@ export const GalleryClient: React.FC<GalleryClientProps> = ({ images }) => {
 
   const handlePrevious = () => {
     if (selectedImage !== null) {
+      setIsImageLoading(true)
+      setImageDirection('left')
       setSelectedImage((selectedImage - 1 + images.length) % images.length)
     }
   }
 
   const handleNext = () => {
     if (selectedImage !== null) {
+      setIsImageLoading(true)
+      setImageDirection('right')
       setSelectedImage((selectedImage + 1) % images.length)
     }
   }
@@ -102,6 +108,7 @@ export const GalleryClient: React.FC<GalleryClientProps> = ({ images }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="inline-block mb-8"
+            style={{ willChange: 'transform, opacity' }}
           >
             <div className="flex items-center justify-center gap-3 text-sm uppercase tracking-[0.4em] text-white/50 font-semibold mb-4">
               <Camera className="w-5 h-5" />
@@ -158,14 +165,19 @@ export const GalleryClient: React.FC<GalleryClientProps> = ({ images }) => {
                 key={image.id}
                 variants={itemVariants}
                 whileHover={{ scale: 1.03, zIndex: 10 }}
-                onClick={() => setSelectedImage(index)}
-                className="relative aspect-square rounded-2xl overflow-hidden bg-white/5 border border-white/10 group cursor-pointer"
+                onClick={() => {
+                  setSelectedImage(index)
+                  setIsImageLoading(true)
+                }}
+                className="relative aspect-square  rounded-2xl overflow-hidden bg-white/5 border border-white/10 group cursor-pointer"
               >
                 {/* Image */}
                 <Image
                   src={image.image.url}
                   alt={image.image.alt || image.title}
                   fill
+                  quality={50}
+                  loading="lazy"
                   className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                 />
@@ -246,16 +258,53 @@ export const GalleryClient: React.FC<GalleryClientProps> = ({ images }) => {
               onClick={(e) => e.stopPropagation()}
               className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
             >
-              <div className="relative w-full h-full">
+              {/* Loading Spinner */}
+              <AnimatePresence>
+                {isImageLoading && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute inset-0 flex items-center justify-center z-10 bg-black/50 backdrop-blur-sm"
+                  >
+                    <div className="flex flex-col items-center gap-4">
+                      <Loader2 className="w-12 h-12 text-white animate-spin" />
+                      <p className="text-white/70 text-sm font-medium">Loading image...</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <motion.div
+                key={selectedImage}
+                initial={{
+                  opacity: 0,
+                  x: imageDirection === 'left' ? -100 : imageDirection === 'right' ? 100 : 0,
+                }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{
+                  opacity: 0,
+                  x: imageDirection === 'left' ? 100 : imageDirection === 'right' ? -100 : 0,
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="relative w-full h-full"
+                onAnimationComplete={() => {
+                  if (!isImageLoading) {
+                    setImageDirection(null)
+                  }
+                }}
+              >
                 <Image
                   src={images[selectedImage].image.url}
                   alt={images[selectedImage].image.alt || images[selectedImage].title}
                   fill
                   className="object-contain"
-                  sizes="100vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1536px) 80vw, 70vw"
                   priority
+                  onLoadingComplete={() => setIsImageLoading(false)}
                 />
-              </div>
+              </motion.div>
 
               {/* Image Info - No caption, just counter */}
               <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-8">

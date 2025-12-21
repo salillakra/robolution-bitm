@@ -5,6 +5,7 @@ import Script from 'next/script'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ClientLayout } from '@/components/ClientLayout'
 import SmoothScroll from '@/components/SmoothScroll'
+import { domAnimation, LazyMotion } from 'framer-motion'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -77,7 +78,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <SmoothScroll />
           <main>
-            <ClientLayout>{children}</ClientLayout>
+            <ClientLayout>
+              <LazyMotion features={domAnimation}>{children}</LazyMotion>
+            </ClientLayout>
           </main>
         </ThemeProvider>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-3LKNP3KLNW" />
